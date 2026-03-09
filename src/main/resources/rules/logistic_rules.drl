@@ -1,0 +1,69 @@
+package rules;
+//generated from Decision Table
+import com.example.droolsengine.Logistics;
+import com.example.droolsengine.DeliveryCountry;
+import com.example.droolsengine.DeliveryType;
+// rule values at A9, header at A4
+rule "Delivery AR 0kg < x <= 60kg"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.AR), $logistics.getWeight > (0), $logistics.getWeight <= (60))
+	then
+		$logistics.setDeliveryType(DeliveryType.STANDARD_MAIL);
+end
+
+// rule values at A10, header at A4
+rule "Delivery AR 60kg < x <= 500kg"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.AR), $logistics.getWeight > (60), $logistics.getWeight <= (500))
+	then
+		$logistics.setDeliveryType(DeliveryType.SPECIAL_FREIGHT);
+end
+
+// rule values at A11, header at A4
+rule "Delivery AR > 500kg"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.AR), $logistics.getWeight > (500))
+	then
+		$logistics.setDeliveryType(DeliveryType.MANUAL_REVIEW);
+end
+
+// rule values at A12, header at A4
+rule "Delivery JP 0kg < x <= 200kg"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.JP), $logistics.getWeight > (0), $logistics.getWeight <= (200))
+	then
+		$logistics.setDeliveryType(DeliveryType.AIR_FREIGHT);
+end
+
+// rule values at A13, header at A4
+rule "Delivery RU any weight"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.RU))
+	then
+		$logistics.setDeliveryType(DeliveryType.MANUAL_REVIEW);
+end
+
+// rule values at A14, header at A4
+rule "Delivery CH any weight"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.CH), $logistics.getWeight > (0))
+	then
+		$logistics.setDeliveryType(DeliveryType.STANDARD_FREIGHT);
+end
+
+// rule values at A15, header at A4
+rule "Delivery DE any weight"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.DE), $logistics.getWeight > (0))
+	then
+		$logistics.setDeliveryType(DeliveryType.STANDARD_FREIGHT);
+end
+
+// rule values at A16, header at A4
+rule "Delivery no available Country"
+	when
+		$logistics:Logistics($logistics.getDestination() in (DeliveryCountry.NOT_DEFINED))
+	then
+		$logistics.setDeliveryType(DeliveryType.MANUAL_REVIEW);
+end
+

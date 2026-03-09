@@ -16,6 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 @Service
 public class LogisticsService {
 
@@ -33,10 +36,20 @@ public class LogisticsService {
         KieServices kieServices = KieServices.Factory.get();
         Resource dt = ResourceFactory.newClassPathResource("rules/Logistics.drl.xls", getClass());
 
+
+
+        /*
         SpreadsheetCompiler spreadsheetCompiler = new SpreadsheetCompiler();
         String drl = spreadsheetCompiler.compile(dt, InputType.XLS);
 
-        System.out.println(drl);
+        try (FileWriter myWriter = new FileWriter("src/main/resources/rules/logistic_rules.drl", true)) {
+            myWriter.write(drl);
+            System.out.println("Successfully appended to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+         */
 
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem().write(dt);
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
