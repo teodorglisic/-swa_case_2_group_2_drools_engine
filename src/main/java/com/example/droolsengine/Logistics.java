@@ -6,9 +6,9 @@ public class Logistics {
     private DeliveryType deliveryType;
 
 
-    public Logistics(double weight, DeliveryCountry destination) {
+    public Logistics(double weight, String destination) {
         this.weight = weight;
-        this.destination = destination;
+        this.destination = DeliveryCountry.fromString(destination);
     }
 
     public double getWeight() {

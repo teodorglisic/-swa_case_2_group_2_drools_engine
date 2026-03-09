@@ -1,8 +1,6 @@
 package com.example.droolsengine;
 
 
-import com.example.droolstest.Country;
-import com.example.droolstest.Customer;
 import org.drools.decisiontable.InputType;
 import org.drools.decisiontable.SpreadsheetCompiler;
 import org.kie.api.KieServices;
@@ -16,14 +14,17 @@ import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LogisticsService {
 
     private static final Logger log = LoggerFactory.getLogger(LogisticsService.class);
 
+    // Manual test
     public static void main(String[] args) {
         LogisticsService l = new LogisticsService();
-        Logistics logistics = new Logistics(50, DeliveryCountry.fromString("RS"));
+        Logistics logistics = new Logistics(50, "RS");
         l.logisticDecisionManager(logistics);
     }
 
@@ -49,7 +50,7 @@ public class LogisticsService {
             kieSession.insert(logistics);
             kieSession.fireAllRules();
 
-            System.out.println(logistics.getDeliveryType());
+            log.info("DeliveryType: {}", logistics.getDeliveryType());
         } catch (Exception e) {
             log.error("e: ", e);
         }
