@@ -27,7 +27,7 @@ public class LogisticsService {
     // Manual test
     public static void main(String[] args) {
         LogisticsService l = new LogisticsService();
-        Logistics logistics = new Logistics(50, "CH");
+        Logistics logistics = new Logistics(250, "JP");
         System.out.println(logistics.getDestination());
         l.logisticDecisionManager(logistics);
     }
@@ -38,18 +38,18 @@ public class LogisticsService {
 
 
 
-        /*
-        SpreadsheetCompiler spreadsheetCompiler = new SpreadsheetCompiler();
-        String drl = spreadsheetCompiler.compile(dt, InputType.XLS);
 
-        try (FileWriter myWriter = new FileWriter("src/main/resources/rules/logistic_rules.drl", true)) {
-            myWriter.write(drl);
-            System.out.println("Successfully appended to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-         */
+//        SpreadsheetCompiler spreadsheetCompiler = new SpreadsheetCompiler();
+//        String drl = spreadsheetCompiler.compile(dt, InputType.XLS);
+//
+//        try (FileWriter myWriter = new FileWriter("src/main/resources/rules/logistic_rules.drl", false)) {
+//            myWriter.write(drl);
+//            System.out.println("Successfully appended to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+
 
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem().write(dt);
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);

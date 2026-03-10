@@ -67,3 +67,11 @@ rule "Delivery no available Country"
 		$logistics.setDeliveryType(DeliveryType.MANUAL_REVIEW);
 end
 
+// rule values at A17, header at A4
+rule "Delivery Fallback"
+	when
+		$logistics:Logistics($logistics.getDeliveryType() == (null))
+	then
+		$logistics.setDeliveryType(DeliveryType.MANUAL_REVIEW);
+end
+
