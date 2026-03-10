@@ -37,8 +37,9 @@ public class LogisticsService {
         Resource dt = ResourceFactory.newClassPathResource("rules/Logistics.drl.xls", getClass());
 
 
-
-
+/**
+ * Code to compile the excel rule table to drl
+ */
 //        SpreadsheetCompiler spreadsheetCompiler = new SpreadsheetCompiler();
 //        String drl = spreadsheetCompiler.compile(dt, InputType.XLS);
 //
